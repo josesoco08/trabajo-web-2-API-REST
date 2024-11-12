@@ -4,13 +4,26 @@ class ProductModel{
     public function __construct(){
         $this->db = new PDO('mysql:host=localhost;dbname=tpe_web_2;charset=utf8', 'root', '');        
     }
-
-    function getAllModel(){
-        $query= $this->db->prepare('SELECT * FROM productos');
-        $query->execute();
-        $productos = $query->fetchAll(PDO::FETCH_OBJ);
-        return $productos;
+    function getAllModel($filtrado = null, $valor = null) {
+        $sql = 'SELECT * FROM producto';
+    
+        // Si se pasa un filtro, aplicamos el 'WHERE'
+        if ($filtrado) {
+            $sql .= ' WHERE ' . $filtrado . ' = ?';
+        }
+    
+            $query = $this->db->prepare($sql);
+            if ($valor !== null ||  $filtrado !== null) {
+                $query->execute([$valor]);
+            }else{        
+                $query->execute([]);
+            }
+    
+            $products = $query->fetchAll(PDO::FETCH_OBJ);
+            return $products;
     }
+    
+    
     function getModel($id){
         $query= $this->db->prepare('SELECT * FROM producto WHERE id_producto = ?');
         $query->execute([$id]);

@@ -1,6 +1,6 @@
 <?php
-require_once 'app/models/productModel.php';
-require_once 'app/views/JSONview.php';
+require_once './app/models/ProductModel.php';
+require_once './app/views/JSONview.php';
 class ProductController {
     private $model;
     private $view;
@@ -9,19 +9,30 @@ class ProductController {
         $this->model = new ProductModel;
         $this->view = new JSONview;
     }
-    function getAllProducts($res, $req){
-        $products = $this->model->getAllModel();       
-        if(!$products){
-        return  $this->view->response("no hay productos disponibles" );
-       }
-       return $this->view->response($products);
+    function getAllProducts($res, $req) {
+        $filtrado = null;
+        $valor = null;
+        if (isset($req->query->filtro)) {
+            $filtrado = $req->query->filtro;
+        }
+        if (isset($req->query->valor)) {
+            $valor = $req->query->valor;
+        }
+        
+        $products = $this->model->getAllModel($filtrado, $valor);
+        
+        if (!$products) {
+            return $this->view->response("No hay productos disponibles", 404);
+        }
+        
+        return $this->view->response($products);
     }
     function getProduct($res, $req){
         $id =$req->params->id;
         $product = $this->model->getModel($id);
         if (!$product) {
             return $this->view->response("No se encontró producto con id=$id", 404);
-        }
+        }  
         return $this->view->response($product);
     }
     function newProduct($res, $req){

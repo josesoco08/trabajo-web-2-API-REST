@@ -1,6 +1,6 @@
 <?php
 require_once 'libs/router.php';
-require_once 'app/controllers/productController.php';
+require_once 'app/controllers/ProductController.php';
 
 $router = new Router();
 
