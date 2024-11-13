@@ -4,6 +4,7 @@ class ProductModel{
     public function __construct(){
         $this->db = new PDO('mysql:host=localhost;dbname=tpe_web_2;charset=utf8', 'root', '');        
     }
+<<<<<<< HEAD
       
     function getAllModel($filtrado = null, $valor = null, $sort = 'id_producto', $order = 'ASC') {
         $allowedSortFields = ['Nombre_producto', 'id_proveedor_fk', 'categoria', 'cantidad', 'talle', 'valor', 'id_producto']; // Campos permitidos para ordenar
@@ -15,6 +16,19 @@ class ProductModel{
         }
         if (!in_array($order, $allowedOrderDirections)) {
             $order = 'ASC'; 
+=======
+    
+    function getAllModel($filtrado = null, $valor = null, $sort = 'id_producto', $order = 'ASC') {
+        $allowedSortFields = ['Nombre_producto', 'id_proveedor_fk', 'categoria', 'cantidad', 'talle', 'valor', 'id_producto']; // Campos permitidos para ordenar
+        $allowedOrderDirections = ['ASC', 'DESC'];
+    
+    
+        if (!in_array($sort, $allowedSortFields)) {
+            $sort = 'id_producto'; // Campo por defecto
+        }
+        if (!in_array($order, $allowedOrderDirections)) {
+            $order = 'ASC'; // Orden por defecto
+>>>>>>> 6229c3e7ce42cba00712c89b1ea66986b634bd0d
         }
         
         $sql = "SELECT * FROM producto";
