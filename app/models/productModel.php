@@ -4,13 +4,26 @@ class ProductModel{
     public function __construct(){
         $this->db = new PDO('mysql:host=localhost;dbname=tpe_web_2;charset=utf8', 'root', '');        
     }
-    function getAllModel($filtrado = null, $valor = null) {
-        $sql = 'SELECT * FROM producto';
+      
+    function getAllModel($filtrado = null, $valor = null, $sort = 'id_producto', $order = 'ASC') {
+        $allowedSortFields = ['Nombre_producto', 'id_proveedor_fk', 'categoria', 'cantidad', 'talle', 'valor', 'id_producto']; // Campos permitidos para ordenar
+        $allowedOrderDirections = ['ASC', 'DESC'];
     
-        // Si se pasa un filtro, aplicamos el 'WHERE'
+    
+        if (!in_array($sort, $allowedSortFields)) {
+            $sort = 'id_producto'; 
+        }
+        if (!in_array($order, $allowedOrderDirections)) {
+            $order = 'ASC'; 
+        }
+        
+        $sql = "SELECT * FROM producto";
+
         if ($filtrado) {
             $sql .= ' WHERE ' . $filtrado . ' = ?';
         }
+
+        $sql .= " ORDER BY $sort $order";
     
             $query = $this->db->prepare($sql);
             if ($valor !== null ||  $filtrado !== null) {
@@ -23,6 +36,8 @@ class ProductModel{
             return $products;
     }
     
+    
+
     
     function getModel($id){
         $query= $this->db->prepare('SELECT * FROM producto WHERE id_producto = ?');

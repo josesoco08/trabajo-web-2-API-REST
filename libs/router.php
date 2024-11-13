@@ -1,8 +1,7 @@
 <?php
-require_once './libs/response.php'; 
-require_once './libs/request.php';  
 
-
+require_once './libs/request.php';
+require_once './libs/response.php';
 
 class Route {
     private $url;
@@ -31,17 +30,18 @@ class Route {
             if($part[0] != ":"){
                 if($part != $partsURL[$key])
                 return false;
-            } //es un parametro
+            } 
             else
             $this->params[''.substr($part,1)] = $partsURL[$key];
         }
         return true;
     }
-    public function run($request, $response) {
-        $controller = new $this->controller();
+    public function run($request, $response){
+        $controller = $this->controller;
         $method = $this->method;
-        $request->params = (object) $this->params; 
-        $controller->$method($response, $request);
+        $request->params = (object) $this->params;
+       
+        (new $controller())->$method($response, $request);
     }
 }
 
@@ -72,9 +72,10 @@ class Router {
             }
         }
         //Si ninguna ruta coincide con el pedido y se configuró ruta por defecto.
-      /*  if ($this->defaultRoute != null)
-            $this->defaultRoute->run($this->request, $this->response);*/
-    }
+       /* if ($this->defaultRoute != null)
+            $this->defaultRoute->run($this->request, $this->response);
+   */
+  }
 
     public function addMiddleware($middleware) {
         $this->middlewares[] = $middleware;
