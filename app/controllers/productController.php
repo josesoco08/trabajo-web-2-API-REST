@@ -41,18 +41,12 @@ class ProductController {
         if (!$product) {
             return $this->view->response("No se encontró producto con id=$id", 404);
         }  
-        return $this->view->response($product, 200);
+        return $this->view->response($product);
     }
     function newProduct($res, $req){
-        if (!isset($req->user)) {
-            return $this->view->response("No autorizado", 401);
-        }
-       
-        if (empty($req->body->Nombre_producto) || empty($req->body->id_proveedor_fk) || 
-        empty($req->body->categoria) || empty($req->body->cantidad) || 
-        empty($req->body->talle) || empty($req->body->valor)) {
-        return $this->view->response("Faltan completar datos", 400);
-    }
+        if(empty($req->body->Nombre_producto) && empty($res->body->id_proveedor_fk) && empty($res->body->categoria) && empty($res->body->cantidad) && empty($res->body->talle) && empty($res->body->valor) && empty($res->body->imagen)){
+            return $this->view->response("faltan completar datos", 400);
+        } 
         $Nombre_producto = $req->body->Nombre_producto;
         $id_proveedor_fk = $req->body->id_proveedor_fk;
         $categoria = $req->body->categoria;
@@ -61,43 +55,37 @@ class ProductController {
         $valor = $req->body->valor;
 
         $id = $this->model->insertProduct($Nombre_producto, $id_proveedor_fk, $categoria, $cantidad, $talle, $valor);
-        if ($id) {
-            return $this->view->response("El producto se ha creado con éxito, con el id=$id", 201);
-        } else {
-            return $this->view->response("Error al crear el producto", 400);
+        if($id){
+            return $this->view->response("el boleto se ha creado con exito, con el id=$id", 200);
         }
     }
     function deleteProduct($res, $req){
-        if (!isset($req->user)) {
-            return $this->view->response("No autorizado", 401);
-        }
-        $id = $req->params->id; 
-        $product = $this->model->getModel($id);
-    
-        if (!$product) {
-            return $this->view->response("No se encontró producto con id=$id", 404);
+        $id =$req->params->id;
+        $product= $this->model->getModel($id);
+
+        if(!$product){
+            return $this->view->response("no se encontro producto con id=$id", 404);
         }
         $this->model->deleteModel($id);
-        return $this->view->response("Se eliminó el producto con el id=$id", 200);
+        $this->view->response("se elimino producto con el id=$id", 200);
     }
 
     function updateProduct($res, $req) {
-        if (!isset($req->user)) {
-            return $this->view->response("No autorizado", 401);
-        }
         $id = $req->params->id;
     
         $product = $this->model->getModel($id);
         if (!$product) {
             return $this->view->response("El producto con el id=$id no existe", 404);
         }
-        
-        if (empty($req->body->Nombre_producto) || empty($req->body->id_proveedor_fk) || 
-        empty($req->body->categoria) || empty($req->body->cantidad) || 
-        empty($req->body->talle) || empty($req->body->valor)) {
-        return $this->view->response('Faltan completar datos', 400);
-    }
-
+        // Validar que los datos 
+        if (!isset($req->body->Nombre_producto) || empty($req->body->Nombre_producto) ||
+            !isset($req->body->id_proveedor_fk) || empty($req->body->id_proveedor_fk) ||
+            !isset($req->body->categoria) || empty($req->body->categoria) ||
+            !isset($req->body->cantidad) || empty($req->body->cantidad) ||
+            !isset($req->body->talle) || empty($req->body->talle) ||
+            !isset($req->body->valor) || empty($req->body->valor)) {
+            return $this->view->response('Faltan completar datos', 400);
+        }
     
         $Nombre_producto = $req->body->Nombre_producto;
         $id_proveedor_fk = $req->body->id_proveedor_fk;
