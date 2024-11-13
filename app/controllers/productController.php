@@ -12,14 +12,22 @@ class ProductController {
     function getAllProducts($res, $req) {
         $filtrado = null;
         $valor = null;
+        $sort = 'id_producto' ;
+        $order = 'ASC' ;
         if (isset($req->query->filtro)) {
             $filtrado = $req->query->filtro;
         }
         if (isset($req->query->valor)) {
             $valor = $req->query->valor;
         }
+        if (isset($req->query->sort)) {
+            $sort = $req->query->sort;
+        }
+        if (isset($req->query->order) && strtoupper($req->query->order) === 'DESC') {
+            $order = 'DESC';
+        }
         
-        $products = $this->model->getAllModel($filtrado, $valor);
+        $products = $this->model->getAllModel($filtrado, $valor, $sort, $order);
         
         if (!$products) {
             return $this->view->response("No hay productos disponibles", 404);
