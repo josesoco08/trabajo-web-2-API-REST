@@ -23,6 +23,12 @@ talle: Ordena los productos por talle.
 valor: Ordena los productos por valor.
 direccion: Dirección de orden para el campo especificado en orderBy:
 
+USUARIO:
+obtener token de autenticacion:
+GET/ usuario/token
+inciar sesion: email: webadmin@gmail.com contraseña: admin
+genera un token jwt para autenticar. Formato base69(usuario:contraseña)
+
 ASC: Orden ascendente (por defecto).
 DESC: Orden descendente.
 Ejemplo de Ordenamiento: Para obtener todos los productos ordenados por precio en orden descendente:
