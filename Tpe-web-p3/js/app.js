@@ -25,10 +25,7 @@ function renderProducts(products) {
             <p><strong>${product.Nombre_producto}</strong> - $${product.valor}</p>
             <p>Categoría: ${product.categoria}, Talle: ${product.talle}, Cantidad: ${product.cantidad}</p>
             <p>ID Proveedor: ${product.id_proveedor_fk}</p>
-            <div class="actions">
-                <button onclick="editProduct(${product.id_producto})">Editar</button>
-                <button class="delete" onclick="deleteProduct(${product.id_producto})">Eliminar</button>
-            </div>
+       
         `;
         productList.appendChild(productItem);
     });
