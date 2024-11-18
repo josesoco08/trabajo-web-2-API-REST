@@ -90,11 +90,11 @@ class Model {
                 -- Estructura de tabla para la tabla `usuario`
                 --
 
+                
                 CREATE TABLE `usuario` (
-                `id` int(11) NOT NULL,
-                `username` varchar(250) NOT NULL,
-                `password` varchar(250) NOT NULL,
-                `is_admin` tinyint(1) DEFAULT 0
+                  `id` int(11) NOT NULL,
+                  `email` varchar(250) NOT NULL,
+                  `password` char(60) NOT NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
                 --
