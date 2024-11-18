@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2024 a las 17:53:05
+-- Tiempo de generación: 18-11-2024 a las 04:46:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,12 +43,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `Nombre_producto`, `id_proveedor_fk`, `categoria`, `cantidad`, `talle`, `valor`, `imagen`) VALUES
-(49, 'remera manga larga', 13, 'Remera de hombre', 6, 'XL', 8000, 'img/245N48607_b.jpg'),
-(51, 'short lula', 16, 'shorts nueva temporada', 13, 'M', 20000, 'img/images.jpeg'),
-(52, 'campera rio', 16, 'camperas de jean', 10, 's-xll', 40000, 'img/images (1).jpeg'),
-(56, 'short lula', 16, 'eee', 1, 'l', 0, NULL),
-(57, 'short ', 13, 'sgh', 1, 'XL', 0, NULL),
-(58, 'short nuevo', 16, 'shorts verano', 10, 'M', 15000, NULL);
+(67, 'short ', 13, 'short mujer', 1, 'XL', 0, NULL),
+(68, 'remera lot', 16, 'remeras hombres', 5, 'L', 7000, NULL);
 
 -- --------------------------------------------------------
 
@@ -79,17 +75,16 @@ INSERT INTO `proveedor` (`id_proveedor`, `Nombre_proveedor`, `medio_de_pago`, `t
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `username` varchar(250) NOT NULL,
-  `password` varchar(250) NOT NULL,
-  `is_admin` tinyint(1) DEFAULT 0
+  `email` varchar(250) NOT NULL,
+  `password` char(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `username`, `password`, `is_admin`) VALUES
-(4, 'webadmin', '$2y$10$i96fWjKeg/YIBXjCungXRekGD2LoDjXCH6qGhTPnQtvnkd6h8L9dO', 0);
+INSERT INTO `usuario` (`id`, `email`, `password`) VALUES
+(4, 'webadmin@gmail.com', '$2y$10$i96fWjKeg/YIBXjCungXRekGD2LoDjXCH6qGhTPnQtvnkd6h8L9dO');
 
 --
 -- Índices para tablas volcadas
@@ -122,7 +117,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
