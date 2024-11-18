@@ -50,6 +50,9 @@ class ProductController {
     }
 
     function newProduct($res, $req) {
+        if (!$res->user) {
+            return $this->view->response("No autorizado", 401);
+        }
        
         if (empty($req->body->Nombre_producto) || empty($req->body->id_proveedor_fk) || 
             empty($req->body->categoria) || empty($req->body->cantidad) || 
@@ -90,6 +93,10 @@ class ProductController {
     }
 
     function updateProduct($res, $req) {
+        if (!$res->user) {
+            return $this->view->response("No autorizado", 401);
+        }
+        
         $id = $req->params->id;
         $product = $this->model->getModel($id);
 
