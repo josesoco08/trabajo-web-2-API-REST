@@ -1,5 +1,5 @@
 <?php
-   require_once './App/Models/useModel.php';
+   require_once './App/Models/ userModel.php';
     require_once './App/Views/JSONview.php';
     require_once './libs/jwt.php';
 
