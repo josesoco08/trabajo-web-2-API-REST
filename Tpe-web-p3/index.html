@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Gestion de gastos</h1>
+    
+    <!--  listar productos -->
+    <div id="product-list"></div>
+
+    <form id="formularioOrden">
+      <label for="orderBy">Ordenar por:</label>
+      <select id="orderBy" name="orderBy">
+        <option value="">Seleccione</option>
+          <option value="Nombre_producto">Nombre</option>
+          <option value="id_proveedor_fk">proveedor</option>
+          <option value="categoria">categoria</option>
+          <option value="cantidad">cantidad</option>
+          <option value="talle">talle</option>
+          <option value="valor">valor</option>
+      </select>
+      <label for="direccion">Dirección:</label>
+      <select id="direccion" name="direccion">
+          <option value="">Seleccione</option>
+          <option value="ASC">Ascendente</option>
+          <option value="DESC">Descendente</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Ordenar</button>
+  </form>
+  
+  <form id="formularioFiltro">
+      <label for="filtro">Filtrar por:</label>
+      <select id="filtro" name="filtro">
+          <option value="">Seleccione</option>
+          <option value="Nombre_producto">Nombre</option>
+          <option value="id_proveedor_fk">proveedor</option>
+          <option value="categoria">categoria</option>
+          <option value="cantidad">cantidad</option>
+          <option value="talle">talle</option>
+          <option value="valor">valor</option>
+
+
+      </select>
+      <label for="valor">Valor:</label>
+      <input type="text" name="valor" id="valor" />
+      <button type="submit" class="btn btn-primary">Filtrar</button>
+  </form>
+  
+    <!-- Script para cargar el JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
+    
+        <footer class="footer text-light py-3 mt-5">
+            <div class="container text-center">
+                <p>Grupo 18- Gestion de gastos</p>
+                <p>Josefina Socobehere</p>
+                <p>Maite Kuhn</p>
+
+              </div>
+        </footer>
+        <script src="js/app.js"></script>
+    </body>
+</html> 
